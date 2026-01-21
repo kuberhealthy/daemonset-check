@@ -112,8 +112,8 @@ func main() {
 
 	// Create a context for our check to operate on.
 	log.Debugln("Allowing this check until", checkDeadline, "to finish.")
-	log.Debugln("Setting check ctx cancel with timeout", khDeadline.Sub(now))
-	ctx, ctxCancel := context.WithTimeout(context.Background(), khDeadline.Sub(now))
+	log.Debugln("Setting check ctx cancel with timeout", checkDeadline.Sub(now))
+	ctx, ctxCancel := context.WithTimeout(context.Background(), checkDeadline.Sub(now))
 
 	// Start listening to interrupts.
 	signalChan := make(chan os.Signal, 5)

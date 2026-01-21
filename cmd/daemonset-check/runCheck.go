@@ -117,7 +117,13 @@ func deploy(ctx context.Context) error {
 		return errors.New("Reached check pod timeout: " + checkDeadline.Sub(now).String() + " waiting for all pods to come online. " +
 			"Node(s) missing daemonset pod: " + formatNodes(nodesMissingDSPod))
 	case <-ctx.Done():
-		return errors.New("failed to complete check due to an interrupt signal. canceling deploying daemonset and shutting down from interrupt")
+		// Add node details to the interrupt error when they are available.
+		missingNodes := formatNodes(nodesMissingDSPod)
+		message := "failed to complete check due to an interrupt signal. canceling deploying daemonset and shutting down from interrupt"
+		if len(missingNodes) > 0 {
+			message = message + ". Node(s) missing daemonset pod: " + missingNodes
+		}
+		return errors.New(message)
 	}
 
 	return nil
