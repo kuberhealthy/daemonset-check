@@ -38,6 +38,7 @@ jobs:
           context: .
           file: ./Containerfile
           push: true
+          platforms: linux/amd64,linux/arm64
           tags: ${{ env.IMAGE_TAG }}
       - name: Publish summary
         run: |
