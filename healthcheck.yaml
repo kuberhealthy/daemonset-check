@@ -42,7 +42,7 @@ spec:
       serviceAccountName: daemonset-khcheck
       containers:
         - name: daemonset-check
-          image: ghcr.io/kuberhealthy/daemonset-check:v0.1.1
+          image: docker.io/kuberhealthy/daemonset-check:v0.1.2
           imagePullPolicy: IfNotPresent
           env:
             - name: POD_NAMESPACE
